@@ -5,5 +5,6 @@ st.title("AI EMAIL AGENT")
 email = st.text_area("Paste email here")
 
 if st.button("Analyze"):
-    result = analyze_email(email)
+    with st.spinner("Analyzing..."):
+        result = analyze_email(email)
     st.json(result)
