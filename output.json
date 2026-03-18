@@ -1,29 +1,33 @@
-{
-  "shrnutí": "Byla přijata faktura č. 2024-156 za konzultační služby v hodnotě 15 000 Kč s termínem splatnosti do 14 dnů.",
-  "kategorie": "faktura",
-  "akce": [
-    "Potvrdit přijetí faktury.",
-    "Zpracovat fakturu k úhradě.",
-    "Naplánovat platbu."
-  ],
-  "priorita": "střední"
-}{
-  "shrnutí": "Klient se dotazuje na stav marketingového auditu, na který čeká již týden, a vyjadřuje nespokojenost s prodlením.",
-  "kategorie": "stížnost",
-  "akce": [
-    "Omluvit se za zpoždění.",
-    "Zjistit stav marketingového auditu a proč došlo ke zpoždění.",
-    "Poskytnout klientovi aktuální informace a předpokládaný termín dodání.",
-    "Navrhnout řešení nebo kompenzaci za čekání, pokud je to vhodné."
-  ],
-  "priorita": "vysoká"
-}{
-  "shrnutí": "Dotaz na služby SEO optimalizace.",
-  "kategorie": "dotaz",
-  "akce": [
-    "Odpovědět s přehledem nabízených SEO služeb",
-    "Nabídnout úvodní konzultaci pro zjištění specifických potřeb",
-    "Zaslat relevantní marketingové materiály o SEO"
-  ],
-  "priorita": "vysoká"
-}
+[
+  {
+    "shrnutí": "Email obsahuje fakturu č. 2024-156 za konzultační služby v hodnotě 15 000 Kč s požadavkem na úhradu do 14 dnů.",
+    "kategorie": "faktura",
+    "akce": [
+      "Zkontrolovat fakturu a zaevidovat ji do účetního systému.",
+      "Naplánovat platbu faktury v termínu splatnosti.",
+      "Potvrdit příjem faktury odesílateli (volitelné)."
+    ],
+    "priorita": "střední"
+  },
+  {
+    "shrnutí": "Klient vyjadřuje nespokojenost s týdenním čekáním na marketingový audit a požaduje jeho dodání.",
+    "kategorie": "Stížnost / Dotaz na stav",
+    "akce": [
+      "Ověřit stav marketingového auditu a zjistit důvod zpoždění.",
+      "Omluvit se klientovi za zpoždění.",
+      "Informovat klienta o aktuálním stavu a předpokládaném termínu dodání auditu.",
+      "Urychlit dokončení a odeslání auditu, pokud je to možné."
+    ],
+    "priorita": "vysoká"
+  },
+  {
+    "shrnutí": "Uživatel se dotazuje na nabízené služby v oblasti SEO optimalizace.",
+    "kategorie": "dotaz",
+    "akce": [
+      "Odpovědět s přehledem SEO služeb",
+      "Nabídnout bezplatnou konzultaci",
+      "Požádat o více informací pro specifikaci nabídky"
+    ],
+    "priorita": "vysoká"
+  }
+]
