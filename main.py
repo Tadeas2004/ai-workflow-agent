@@ -4,8 +4,7 @@ from google import genai
 from google.genai import types
 import json
 
-
-def main() -> None:
+def analyze_email(email: str) -> dict[str, str]:
     load_dotenv()
     api_key = os.getenv("GEMINI_API_KEY")
     client = genai.Client(api_key=api_key)
@@ -24,6 +23,19 @@ def main() -> None:
         - navrhni nejrozumnější akce na odpovězení na email
         Vracej pouze JSON, žádný extra text navíc není vyžadován.
         """
+    response = client.models.generate_content(
+                model="gemini-2.5-flash",
+                contents=email,
+                config=types.GenerateContentConfig(system_instruction=system_prompt)
+                )
+
+    raw = response.text
+    raw = raw.replace("```", "")
+    parsed = raw.replace("json", "")
+    return json.loads(parsed)
+
+
+def main() -> None:
 
     emails = [
     "Dobrý den, posílám fakturu č. 2024-156 za konzultační služby v hodnotě 15 000 Kč. Prosím o úhradu do 14 dnů.",
@@ -31,19 +43,11 @@ def main() -> None:
     "Dobrý den, zajímalo by mě jaké služby nabízíte v oblasti SEO optimalizace."
     ]
 
-    data = []
+    data: list[dict[str, str]] = []
+
     try:
         for email in emails:
-            response = client.models.generate_content(
-                model="gemini-2.5-flash",
-                contents=email,
-                config=types.GenerateContentConfig(system_instruction=system_prompt)
-                )
-
-            raw = response.text
-            raw = raw.replace("```", "")
-            parsed = raw.replace("json", "")
-            data.append(json.loads(parsed))
+            data.append(analyze_email(email))
     except genai.errors.ClientError as e:
         print(f"API chyba: {e}")
     except Exception as e:
