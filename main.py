@@ -24,7 +24,7 @@ def analyze_email(email: str) -> dict[str, str]:
         Vracej pouze JSON, žádný extra text navíc není vyžadován.
         """
     response = client.models.generate_content(
-                model="gemini-2.5-flash",
+                model="gemini-2.5-flash-lite",
                 contents=email,
                 config=types.GenerateContentConfig(system_instruction=system_prompt)
                 )
