@@ -36,28 +36,7 @@ def analyze_email(email: str) -> dict[str, str]:
 
 
 def main() -> None:
-
-    emails = [
-    "Dobrý den, posílám fakturu č. 2024-156 za konzultační služby v hodnotě 15 000 Kč. Prosím o úhradu do 14 dnů.",
-    "Dobrý den, potřeboval bych od vás marketingový audit, už na něj čekám týden.",
-    "Dobrý den, zajímalo by mě jaké služby nabízíte v oblasti SEO optimalizace."
-    ]
-
-    data: list[dict[str, str]] = []
-
-    try:
-        for email in emails:
-            data.append(analyze_email(email))
-    except genai.errors.ClientError as e:
-        print(f"API chyba: {e}")
-    except Exception as e:
-        print(f"Neočekávaná chyba: {e}")
-
-    if data:
-        with open("output.json", "w") as file:
-            json.dump(data, file, ensure_ascii=False, indent=2)
-    else:
-        print("Žádná data k uložení.")
+    pass
 
 if __name__ == '__main__':
     main()
