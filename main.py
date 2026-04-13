@@ -24,28 +24,28 @@ def analyze_email(email: str) -> dict:
 
     # Step 1: Extract key facts from the email
     extraction_system = """You are an email analysis assistant.
-Extract key facts from the email. Return ONLY valid JSON:
-{
-  "sender_intent": "what the sender wants or is communicating",
-  "urgency_signals": ["list", "of", "urgency", "phrases"],
-  "email_type": "question|request|complaint|invoice|other"
-}"""
+    Extract key facts from the email. Return ONLY valid JSON:
+    {
+    "sender_intent": "what the sender wants or is communicating",
+    "urgency_signals": ["list", "of", "urgency", "phrases"],
+    "email_type": "question|request|complaint|invoice|other"
+    }"""
 
     facts = _call_gemini(client, email, extraction_system)
 
     # Step 2: Use extracted facts to produce a full structured analysis
     analysis_system = f"""You are an email analysis assistant.
-You have already extracted these facts from the email:
-{json.dumps(facts, indent=2)}
+    You have already extracted these facts from the email:
+    {json.dumps(facts, indent=2)}
 
-Now produce a full analysis. Return ONLY valid JSON:
-{{
-  "summary": "2-3 sentence summary of the email",
-  "category": "invoice|inquiry|complaint|other",
-  "priority": "high|medium|low",
-  "priority_reason": "one sentence explaining why this priority level was chosen",
-  "actions": ["specific action 1", "specific action 2", "specific action 3"]
-}}"""
+    Now produce a full analysis. Return ONLY valid JSON:
+    {{
+    "summary": "2-3 sentence summary of the email",
+    "category": "invoice|inquiry|complaint|other",
+    "priority": "high|medium|low",
+    "priority_reason": "one sentence explaining why this priority level was chosen",
+    "actions": ["specific action 1", "specific action 2", "specific action 3"]
+    }}"""
 
     return _call_gemini(client, email, analysis_system)
 
