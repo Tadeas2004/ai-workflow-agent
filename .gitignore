@@ -1,4 +1,17 @@
+# Sensitive credentials & tokens
 .env
-venv/
-__pycache__/
+credentials.json
+token.json
+
+# Local runtime database
 emails.db
+
+# Virtual environments
+venv/
+
+# Python & IDE cache folders
+__pycache__/
+services/__pycache__/
+.claude/
+.mypy_cache/
+.DS_Store

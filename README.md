@@ -1,52 +1,90 @@
 # AI Email Agent
 
-An AI-powered email analysis tool that extracts category, priority, and suggested actions from any email using a two-step reasoning pipeline.
+An AI-powered email analysis tool that reads any email and returns a structured breakdown — category, priority with reasoning, summary, and specific action items — using a two-step reasoning pipeline built on Gemini 2.5 Flash Lite.
 
-## How it works
+**Live demo:** [ai-email-agent-9n28.onrender.com](https://ai-email-agent-9n28.onrender.com)
 
-The agent runs two sequential LLM calls — this is what makes it an agent rather than a simple prompt wrapper:
+---
 
-1. **Extraction step** — Gemini reads the email and extracts structured facts: sender intent, urgency signals, and email type
-2. **Analysis step** — Gemini uses those extracted facts as context to produce the full analysis: summary, category, priority with reasoning, and specific action items
+![Screenshot placeholder](https://via.placeholder.com/900x500?text=Screenshot+coming+soon)
 
-This chain-of-thought approach produces more accurate prioritization and more specific action suggestions than a single prompt would.
+---
+
+## What it does
+
+Paste any email and the agent runs two sequential AI calls:
+
+1. **Extraction** — identifies sender intent, urgency signals, and email type
+2. **Analysis** — uses those extracted facts to produce a full structured report
+
+**Output:**
+- Category — `invoice`, `inquiry`, `complaint`, or `other`
+- Priority — `high`, `medium`, or `low` with a one-sentence explanation of why
+- Summary — 2-3 sentence overview of the email
+- Suggested actions — 3 specific next steps to take
+
+**History tab** — every analysis is saved to a local SQLite database and browsable in the UI, with priority color-coding (red / yellow / green).
+
+---
 
 ## Tech stack
 
 | Layer | Tech |
 |---|---|
-| AI | Gemini 2.5 Flash Lite (Google GenAI) |
+| AI model | Gemini 2.5 Flash Lite (`google-genai`) |
 | UI | Streamlit |
 | Database | SQLite |
-| Language | Python |
+| Language | Python 3.12 |
 
-## Features
+---
 
-- Two-step AI reasoning chain (fact extraction → analysis)
-- Priority reasoning — the AI explains *why* it assigned a priority level
-- History tab — all past analyses stored in SQLite and browsable in the UI
-- Color-coded priority (red / yellow / green)
+## Run locally
 
-## Setup
-
-**Prerequisites:** Python 3.12+, Gemini API key (free at [aistudio.google.com](https://aistudio.google.com))
+**Prerequisites:** Python 3.12+, a free Gemini API key from [aistudio.google.com](https://aistudio.google.com)
 
 ```bash
 git clone https://github.com/Tadeas2004/ai-email-agent.git
 cd ai-email-agent
 
 python3 -m venv venv
-venv/bin/python3 -m pip install -r requirements.txt
+venv/bin/pip install -r requirements.txt
 ```
 
-Create a `.env` file:
+Create a `.env` file in the project root:
+
 ```
 GEMINI_API_KEY=your_key_here
 ```
 
-Run:
+Run the app:
+
 ```bash
 venv/bin/streamlit run app.py
 ```
 
-Open `http://localhost:8501`
+Open [http://localhost:8501](http://localhost:8501).
+
+---
+
+## Deploy on Render
+
+1. Push the project to a GitHub repository
+2. Go to [render.com](https://render.com) and create a new **Web Service**
+3. Connect your GitHub repo
+4. Set the following:
+
+| Field | Value |
+|---|---|
+| Environment | `Python` |
+| Build command | `pip install -r requirements.txt` |
+| Start command | `streamlit run app.py --server.port $PORT --server.address 0.0.0.0` |
+
+5. Add an environment variable in the Render dashboard:
+
+```
+GEMINI_API_KEY=your_key_here
+```
+
+6. Click **Deploy** — Render will build and host the app automatically.
+
+> Note: The free Render tier spins down after inactivity. First load may take ~30 seconds to wake up.
