@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  email-agent:
+    build: .
+    container_name: ai_email_agent_prod
+    ports:
+      - "8501:8501"
+    env_file:
+      - .env
+    volumes:
+      - ./emails.db:/app/emails.db
